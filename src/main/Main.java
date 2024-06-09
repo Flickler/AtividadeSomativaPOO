@@ -1,22 +1,22 @@
 package main;
 
 import model.Loan;
+import model.Loans;
 import util.UserInterface;
 
 public class Main {
     public static void main(String[] args) {
         UserInterface userInterface = new UserInterface();
+        Loans loans = new Loans();
 
-        float housingValue = userInterface.getHousingValue();
-        int deadlineFinancing = userInterface.getDeadlineFinancing();
-        float annualInterestRate = userInterface.getAnnualInterestRate();
+        for(int i = 0; i < 4; i++){
+            System.out.println("Digite o valor do " + (i+1) + "º financiamento");
+            float housingValue = userInterface.getHousingValue();
+            int deadlineFinancing = userInterface.getDeadlineFinancing();
+            float annualInterestRate = userInterface.getAnnualInterestRate();
+            loans.addNewLoan(new Loan(housingValue, deadlineFinancing, annualInterestRate));
+        }
 
-        Loan loan = new Loan(housingValue, deadlineFinancing, annualInterestRate);
-        System.out.println("Financiamento realizado");
-        System.out.println("O valor do financiamento é de R$ " + loan.getHousingValue());
-        System.out.println("O tempo anual previsto é de " + loan.getDeadlineFinancing() + " anos");
-        System.out.println("A taxa anual do financiamento é de " + loan.getAnnualInterestRate() + "%");
-        System.out.println("O pagamento mensal será de R$ " + loan.calculateMonthlyPayment());
-        System.out.println("O pagamento anual será de R$ " + loan.calculateTotalPayment());
+        loans.listAllLoans();
     }
 }
